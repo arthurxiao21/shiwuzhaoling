@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiwuzhaoling.mapper.ItemMapper">
+	<select id="findItems" parameterType="ItemQueryVo" resultType="ItemCustom">
+		SELECT item_id,category,description,lost_address FROM `item` WHERE
+		is_lost=#{is_lost} ORDER BY create_time DESC LIMIT #{offset},#{limit}
+	</select>
+	<select id="findItemByItem_id" parameterType="Integer"
+		resultType="Item">
+		SELECT * from `item` WHERE item_id=#{values}
+	</select>
+	<resultMap type="ItemInfo" id="ItemInfoMap">
+		<id property="item_id" column="item_id" />
+		<result property="description" column="description" />
+		<result property="is_returned" column="is_returned" />
+		<result property="loster_id" column="loster_id" />
+		<result property="returner_id" column="returner-id" />
+		<result property="category" column="category" />
+		<result property="lost_address" column="lost_address" />
+		<result property="return_address" column="return_address" />
+		<result property="lost_time" column="lost_time" />
+		<result property="return_time" column="return_time" />
+		<result property="create_time" column="create_time" />
+		<result property="is_lost" column="is_lost" />
+
+		<association property="userCustom" javaType="UserCustom">
+			<result property="name" column="name" />
+			<result property="email" column="email" />
+			<result property="telephone" column="telephone" />
+		</association>
+	</resultMap>
+	<select id="findItemInfoByItem_id" parameterType="Integer"
+		resultMap="ItemInfoMap">
+		SELECT i.*,u.name,u.email,u.telephone
+		FROM item i LEFT JOIN user u ON i.loster_id=u.user_id
+		WHERE
+		i.item_id=#{values}
+	</select>
+</mapper>
