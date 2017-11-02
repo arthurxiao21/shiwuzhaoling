@@ -23,15 +23,35 @@
 	href="images/icon/apple-touch-icon-196x196-precomposed.png">
 <meta name="viewport"
 	content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-<script src="js/jquery.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/style.css" />
+<script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script>
-	$(document).ready(function() {
-		$(".formarea li:last input[type='button']").click(function() {
-			alert("测试跳转效果，程序对接予以删除!");
-			location.href = "login.html";
-		});
-	});
+	function submit() {
+		var password = $.trim(("input[name]='password'").val);
+		var repass = $.trim(("input[name]='repass'").val);
+		//此处应该有更多的校验
+		if (password != repass) {
+			$(".beforeMark").append("<mark class="formMark">两次密码不一致</mark>")
+			return false;
+		}
+		var data = {
+			telephone : $.trim($("input[name]='telephone").val),
+			password : $.trim(("input[name]='password'").val),
+			name : $.trim($("input[name]='name'").val),
+			email : $.trim($("input[name]='email'").val),
+			stu_id : $.trim($("input[stu_id]='stu_id'"))
+		}
+		$.ajax({
+			url:"<%=request.getContextPath()%>/saveUser",
+			type:'post',
+			data:data;
+			dataType:'json',
+			success:function(data,textStatus,xhr){
+				window.location.href="<%=request.getContextPath()%>/user";
+			}
+		})
+	}
 </script>
 </head>
 <body>
@@ -40,23 +60,23 @@
 		<a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
 		<h1>注册</h1>
 	</header>
-	<div style="height: 1rem;"></div>
+	<div class="beforeMark" style="height: 1rem;"></div>
 	<ul class="formarea">
 		<li><label class="lit">账号：</label> <input name="telephone"
 			type="tel" placeholder="手机号码" class="textbox" /></li>
 		<li><label class="lit">密码：</label> <input name="password"
 			type="password" placeholder="设置密码" class="textbox" /></li>
-		<li><label class="lit">确认密码：</label> <input type="password"
-			placeholder="确认密码" class="textbox" /></li>
+		<li><label class="lit">确认密码：</label> <input name="repass"
+			type="password" placeholder="确认密码" class="textbox" /></li>
 		<li><label class="lit">姓名：</label> <input name="name" type="text"
 			placeholder="姓名" class="textbox" /></li>
 		<li><label class="lit">Email：</label> <input name="email"
 			type="text" placeholder="Email" class="textbox" /></li>
-		<li><label class="lit">学号：</label> <input type="text"
-			placeholder="学号" class="textbox" /></li>
+		<li><label class="lit">学号：</label> <input name="stu_id"
+			type="text" placeholder="学号" class="textbox" /></li>
 		<li class="liLink"><a href="article.html" class="fl">《用户协议》</a> <a
-			href="login.html" class="fr">已有账号，登陆</a></li>
-		<li><input type="button" value="立即注册" /></li>
+			href="<%=request.getContextPath()%>/login" class="fr">已有账号，登陆</a></li>
+		<li><input type="button" value="立即注册" onClick="submit()" /></li>
 	</ul>
 	<div style="height: 1.2rem;"></div>
 	<nav>

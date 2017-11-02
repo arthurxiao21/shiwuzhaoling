@@ -4,6 +4,7 @@ public class UserCustom {
 	private String telephone;
 	private String name;
 	private String email;
+	
 	public String getTelephone() {
 		return telephone;
 	}

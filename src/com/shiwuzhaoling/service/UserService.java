@@ -1,5 +1,9 @@
 package com.shiwuzhaoling.service;
 
-public interface UserService {
+import com.shiwuzhaoling.pojo.UserCustom;
 
+public interface UserService {
+	boolean findUserByAll(UserCustom userCustom);
+
+	void saveUser(UserCustom userCustom);
 }
