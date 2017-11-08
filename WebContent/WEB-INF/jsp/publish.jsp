@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>个人中心</title>
+<title>发布信息</title>
 <meta name="keywords" content="KEYWORDS..." />
 <meta name="description" content="DESCRIPTION..." />
 <meta name="author" content="DeathGhost" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name='apple-touch-fullscreen' content='yes'>
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="category=no">
 <meta name="format-detection" content="address=no">
 <link rel="icon" href="images/icon/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon-precomposed" sizes="57x57"
@@ -26,25 +26,44 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/style.css" />
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
+<script>
+	function checkForm() {
+		var category = $.trim($("#category").val());
+		if (category == null || category == '') {
+			$(".beforeMark").append('<mark class="formMark">种类不能为空</mark>');
+			return false;
+		}
+		var address = $.trim($("#lost_address").val());
+		if (address == null || address == '') {
+			$(".beforeMark").append('<mark class="formMark">地址不能为空</mark>');
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
 	<!--header-->
 	<header>
 		<a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
-		<h1>个人中心</h1>
-		<a href="user_set.html" class="iconfont setIcon">&#42;</a>
+		<h1>发布信息</h1>
 	</header>
 	<div style="height: 1rem;"></div>
-	<div class="userInfor">
-		<a class="userIcon"><img src="images/icon/DefaultAvatar.jpg" /></a>
-		<h2>${user.name}</h2>
-	</div>
-	<ul class="userList">
-		<li><a href="<%=request.getContextPath()%>/foundList" class="orderListIcon">失物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/lostList" class="collectionIcon">拾物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/profile" class="profileIcon">个人资料</a></li>
-	</ul>
-	<!--fixedNav:footer-->
+	<div class="beforeMark"></div>
+	<form method="post" id="item"
+		action="<%=request.getContextPath()%>/publish"
+		onsubmit="return checkForm()">
+		<ul class="formarea">
+			<li><label class="lit">失物或拾物:</label><input name="is_lost"
+				type="text" id="is_lost" placeholder="0或1" class="textbox" /></li>
+			<li><label class="lit">类别：</label> <input name="category"
+				type="text" id="category" placeholder="类别" class="textbox" /></li>
+			<li><label class="lit">地点：</label> <input name="lost_address"
+				id="lost_address" type="text" placeholder="地点" class="textbox" /></li>
+			<li><label class="lit">详细描述：</label> <input name="description"
+				id="description" type="text" placeholder="描述" class="textbox" /></li>
+			<li><input type="submit" value="提交" /></li>
+		</ul>
+	</form>
 	<div style="height: 1.2rem;"></div>
 	<nav>
 		<a href="<%=request.getContextPath()%>/index" class="homeIcon">首页</a>

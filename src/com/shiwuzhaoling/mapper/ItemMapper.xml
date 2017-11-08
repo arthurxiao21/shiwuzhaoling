@@ -36,4 +36,24 @@
 		WHERE
 		i.item_id=#{values}
 	</select>
+	<insert id="saveLostItem" parameterType="Item">
+	INSERT INTO
+	`item`(description,category,lost_address,is_lost,loster_id)
+	 VALUES(#{description},#{category},#{lost_address},#{is_lost},#{loster_id})
+	</insert>
+	<insert id="saveFoundItem" parameterType="Item">
+	INSERT INTO
+	`item`(description,category,found_address,is_lost,founder_id)
+	 VALUES(#{description},#{category},#{lost_address},#{is_lost},#{loster_id})
+	</insert>
+	<select id="findItemsByFounder_id" parameterType="Integer"
+	resultType="ItemCustom">
+	SELECT item_id,category,description,found_address
+	FROM `item` WHERE founder_id=#{values}
+	</select>
+	<select id="findItemsByLoster_id" parameterType="Integer"
+	resultType="ItemCustom">
+	SELECT item_id,category,description,lost_address
+	FROM `item` WHERE loster_id=#{values}
+	</select>
 </mapper>

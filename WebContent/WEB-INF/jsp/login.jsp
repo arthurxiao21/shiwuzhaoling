@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
-<title>个人中心</title>
+<title>注册</title>
 <meta name="keywords" content="KEYWORDS..." />
 <meta name="description" content="DESCRIPTION..." />
 <meta name="author" content="DeathGhost" />
@@ -26,25 +27,34 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/style.css" />
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
+<script>
+
+</script>
 </head>
 <body>
-	<!--header-->
-	<header>
-		<a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
-		<h1>个人中心</h1>
-		<a href="user_set.html" class="iconfont setIcon">&#42;</a>
-	</header>
-	<div style="height: 1rem;"></div>
-	<div class="userInfor">
-		<a class="userIcon"><img src="images/icon/DefaultAvatar.jpg" /></a>
-		<h2>${user.name}</h2>
-	</div>
-	<ul class="userList">
-		<li><a href="<%=request.getContextPath()%>/foundList" class="orderListIcon">失物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/lostList" class="collectionIcon">拾物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/profile" class="profileIcon">个人资料</a></li>
-	</ul>
-	<!--fixedNav:footer-->
+	<section class="formLogo">
+		<h2>失物招领</h2>
+	</section>
+	<c:if test="${notUser!=null}">
+		<mark class="formMark">用户不存在</mark>
+	</c:if>
+	<c:if test="${notPassoword!=null}">
+		<mark class="formMark">密码错误</mark>
+	</c:if>
+	<form id="loginForm" id="user"
+		action="${pageContext.request.contextPath}/login" method="post">
+		<ul class="formarea">
+			<li><label class="lit">账号</label> <input type="text"
+				id="user_id" name="user_id" placeholder="user_id" class="textbox" /></li>
+			<li><label class="lit">密码</label> <input type="password"
+				id="password" name="password" placeholder="密码" class="textbox" /></li>
+			<li class="liLink lg_liLink"><span><label><input
+						type="checkbox" />记住密码</label></span> <span><a
+					href="<%=request.getContextPath()%>/register">注册账号</a></span> <span><a
+					href="<%=request.getContextPath()%>/find_pwd">找回密码</a></span></li>
+			<li><input type="submit" value="登陆" /></li>
+		</ul>
+	</form>
 	<div style="height: 1.2rem;"></div>
 	<nav>
 		<a href="<%=request.getContextPath()%>/index" class="homeIcon">首页</a>

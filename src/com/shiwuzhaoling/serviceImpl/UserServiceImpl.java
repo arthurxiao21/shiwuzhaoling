@@ -1,8 +1,11 @@
 package com.shiwuzhaoling.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.shiwuzhaoling.mapper.UserMapper;
+import com.shiwuzhaoling.pojo.User;
 import com.shiwuzhaoling.pojo.UserCustom;
 import com.shiwuzhaoling.service.UserService;
 
@@ -17,14 +20,24 @@ public class UserServiceImpl implements UserService {
 		this.userMapper = userMapper;
 	}
 
-	@Override
-	public boolean findUserByAll(UserCustom userCustom) {
-		return userMapper.findUserByAll(userCustom);
+	
+
+	public void saveUser(User user) {
+		userMapper.saveUser(user);
 	}
 
-	@Override
-	public void saveUser(UserCustom userCustom) {
-		userMapper.saveUser(userCustom);
+	public List<User> findUserByTelAndStu_id(UserCustom userCustom) {
+		return userMapper.findUserByTelAndStu_id();
+	}
+
+	
+
+	public User existUser(Integer user_id) {
+		return userMapper.existUser(user_id);
+	}
+
+	public User findUserByUser_idAndPassword(User user) {
+		return userMapper.findUserByUser_idAndPassword(user);
 	}
 
 }

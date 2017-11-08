@@ -1,11 +1,18 @@
 package com.shiwuzhaoling.mapper;
 
-import com.shiwuzhaoling.pojo.UserCustom;
+import java.util.List;
+
+import com.shiwuzhaoling.pojo.User;
 
 public interface UserMapper {
 
-	void saveUser(UserCustom userCustom);
+	void saveUser(User user);
 
-	boolean findUserByAll(UserCustom userCustom);
+	List<User> findUserByTelAndStu_id();
+
+	User findUserByUser_idAndPassword(User user);
+
+	User existUser(Integer user_id);
+	 
 
 }

@@ -4,7 +4,7 @@ public class User {
 	private Integer user_id;
 	private String wx_id;
 	private String telephone;
-	private Integer name;
+	private String name;
 	private String email;
 	private Integer stu_id;
 	private String password;
@@ -39,10 +39,11 @@ public class User {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	public Integer getName() {
+	
+	public String getName() {
 		return name;
 	}
-	public void setName(Integer name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	public String getEmail() {
@@ -62,6 +63,10 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String toString() {
+		return "User [user_id=" + user_id + ", wx_id=" + wx_id + ", telephone=" + telephone + ", name=" + name
+				+ ", email=" + email + ", stu_id=" + stu_id + ", password=" + password + ", role=" + role + "]";
 	}
 	
 }

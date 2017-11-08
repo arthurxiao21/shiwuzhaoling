@@ -1,9 +1,18 @@
 package com.shiwuzhaoling.service;
 
+import java.util.List;
+
+import com.shiwuzhaoling.pojo.User;
 import com.shiwuzhaoling.pojo.UserCustom;
 
 public interface UserService {
-	boolean findUserByAll(UserCustom userCustom);
 
-	void saveUser(UserCustom userCustom);
+	void saveUser(User user);
+
+	List<User> findUserByTelAndStu_id(UserCustom userCustom);
+
+
+	User existUser(Integer user_id);
+
+	User findUserByUser_idAndPassword(User user);
 }

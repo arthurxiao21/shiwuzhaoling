@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.shiwuzhaoling.mapper.ItemMapper;
+import com.shiwuzhaoling.mapper.UserMapper;
 import com.shiwuzhaoling.pojo.Item;
 import com.shiwuzhaoling.pojo.ItemCustom;
 import com.shiwuzhaoling.pojo.ItemInfo;
@@ -24,10 +25,6 @@ public class ItemServiceImpl implements ItemService {
 		this.itemMapper = itemMapper;
 	}
 
-	public void saveOne(Item lostItem) {
-		itemMapper.saveOne(lostItem);
-
-	}
 
 	public List<ItemCustom> findItems(ItemQueryVo itemQueryVo) {
 		return itemMapper.findItems(itemQueryVo);
@@ -40,6 +37,26 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public ItemInfo findItemInfoByItem_Id(int item_id) {
 		return itemMapper.findItemInfoByItem_id(item_id);
+	}
+
+	@Override
+	public void saveLostItem(Item lostItem) {
+		itemMapper.saveLostItem(lostItem);
+	}
+
+	@Override
+	public void saveFoundItem(Item foundItem) {
+		itemMapper.saveFoundItem(foundItem);
+	}
+
+	@Override
+	public List<ItemCustom> findItemsByLoster_id(Integer user_id) {
+		return itemMapper.findItemsByLoster_id(user_id);
+	}
+
+	@Override
+	public List<ItemCustom> findItemsByFounder_id(Integer user_id) {
+		return itemMapper.findItemsByFounder_id(user_id);
 	}
 
 }

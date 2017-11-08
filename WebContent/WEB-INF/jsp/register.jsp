@@ -27,30 +27,58 @@
 	href="<%=request.getContextPath()%>/css/style.css" />
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script>
-	function submit() {
-		var password = $.trim(("input[name]='password'").val);
-		var repass = $.trim(("input[name]='repass'").val);
+	function submitForm() {
+		var password = $.trim($("input[name='password']").val());
+		var repass = $.trim($("input[name='repass']").val());
 		//此处应该有更多的校验
 		if (password != repass) {
-			$(".beforeMark").append("<mark class="formMark">两次密码不一致</mark>")
+			$(".beforeMark").append('<mark class="formMark">两次密码不一致</mark>');
 			return false;
 		}
 		var data = {
-			telephone : $.trim($("input[name]='telephone").val),
-			password : $.trim(("input[name]='password'").val),
-			name : $.trim($("input[name]='name'").val),
-			email : $.trim($("input[name]='email'").val),
-			stu_id : $.trim($("input[stu_id]='stu_id'"))
+			telephone : $.trim($("input[name='telephone']").val()),
+			password : $.trim($("input[name='password']").val()),
+			name : $.trim($("input[name='name']").val()),
+			email : $.trim($("input[name='email]'").val()),
+			stu_id : $.trim($("input[stu_id='stu_id']").val())
 		}
 		$.ajax({
 			url:"<%=request.getContextPath()%>/saveUser",
 			type:'post',
-			data:data;
+			contentType:"application/json",
+			data:JSON.stringify(data),
 			dataType:'json',
 			success:function(data,textStatus,xhr){
 				window.location.href="<%=request.getContextPath()%>/user";
 			}
 		})
+	}
+	function checkForm(){
+		var telephone=$.trim($("#telephone").val());
+		if(telephone==null||telephone==''){
+			$(".beforeMark").append('<mark class="formMark">电话号码不能为空</mark>');
+			return false;
+		}
+		var password = $.trim($("input[name='password']").val());
+		var repass = $.trim($("input[name='repass']").val());
+		if(password==null||password==''){
+			$(".beforeMark").append('<mark class="formMark">密码不能为空</mark>');
+			return false;
+		}
+		if (password != repass) {
+			$(".beforeMark").append('<mark class="formMark">两次密码不一致</mark>');
+			return false;
+		}
+		var email=$.trim($("#email").val());
+		if(email==null||email==''){
+			$(".beforeMark").append('<mark class="formMark">email不能为空</mark>');
+			return false;
+		}
+		var stu_id=$.trim($("#stu_id").val());
+		if(stu_id==null||stu_id==''){
+			$(".beforeMark").append('<mark class="formMark">学号不能为空</mark>');
+			return false;
+		}
 	}
 </script>
 </head>
@@ -60,24 +88,27 @@
 		<a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
 		<h1>注册</h1>
 	</header>
-	<div class="beforeMark" style="height: 1rem;"></div>
+	<div style="height: 1rem;"></div>
+	<div class="beforeMark"></div>
+	<form method="post" id="user" action="<%=request.getContextPath()%>/register"
+	onsubmit="return checkForm()">
 	<ul class="formarea">
-		<li><label class="lit">账号：</label> <input name="telephone"
-			type="tel" placeholder="手机号码" class="textbox" /></li>
+		<li><label class="lit">手机号：</label> <input name="telephone"
+			id="telephone" type="tel" placeholder="手机号码" class="textbox" /></li>
 		<li><label class="lit">密码：</label> <input name="password"
-			type="password" placeholder="设置密码" class="textbox" /></li>
+			id="password" type="password" placeholder="设置密码" class="textbox" /></li>
 		<li><label class="lit">确认密码：</label> <input name="repass"
 			type="password" placeholder="确认密码" class="textbox" /></li>
 		<li><label class="lit">姓名：</label> <input name="name" type="text"
-			placeholder="姓名" class="textbox" /></li>
+			id="name" placeholder="姓名" class="textbox" /></li>
 		<li><label class="lit">Email：</label> <input name="email"
-			type="text" placeholder="Email" class="textbox" /></li>
+			id="email" type="text" placeholder="Email" class="textbox" /></li>
 		<li><label class="lit">学号：</label> <input name="stu_id"
-			type="text" placeholder="学号" class="textbox" /></li>
-		<li class="liLink"><a href="article.html" class="fl">《用户协议》</a> <a
-			href="<%=request.getContextPath()%>/login" class="fr">已有账号，登陆</a></li>
-		<li><input type="button" value="立即注册" onClick="submit()" /></li>
+			id="stu_id" type="text" placeholder="学号" class="textbox" /></li>
+		<li class="liLink"><a href="article.html" class="fl">《用户协议》</a> <a href="<%=request.getContextPath()%>/login" class="fr">已有账号，登陆</a></li>
+		<li><input type="submit" value="立即注册" /></li>
 	</ul>
+	</form>
 	<div style="height: 1.2rem;"></div>
 	<nav>
 		<a href="<%=request.getContextPath()%>/index" class="homeIcon">首页</a>
