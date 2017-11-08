@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>个人中心</title>
+<title>分类</title>
 <meta name="keywords" content="KEYWORDS..." />
 <meta name="description" content="DESCRIPTION..." />
 <meta name="author" content="DeathGhost" />
@@ -13,7 +13,7 @@
 <meta name='apple-touch-fullscreen' content='yes'>
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
-<meta name="format-detection" content="address=no">
+<meta name="format-detection" content="category=no">
 <link rel="icon" href="images/icon/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon-precomposed" sizes="57x57"
 	href="images/icon/apple-touch-icon-57x57-precomposed.png">
@@ -26,25 +26,82 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/style.css" />
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
+
+<script>
+	var category_dict = {};
+	function render(category_dict) {
+		$
+				.each(
+						category_dict,
+						function(idex, category) {
+							if (idex == 0) {
+								html = "<li class='current_style' id='"+category.id+"'><a><strong>"
+								+category.name+"</strong></a></li>";
+								$(".class_tree ul").append(html);
+							} else {
+								html = "<li><a><strong>"+category.name
+								+"</strong></a></li>";
+								$(".class_tree ul").append(html);
+							}
+						})
+		alter();
+	}
+	function alter() {
+		$(".category_cont").innerHTML = " ";
+		var cate_id = $(".current_style").attr("id");
+		var cates;
+		for(i in category_dict){
+			if(category_dict[i].id==cate_id){
+				cates = category_dict[i].cates;
+			}
+		}
+		for(x in cates){
+			console.log(cates[x]);
+			url = "<%=request.getContextPath()%>/search?cate=" + cates[x];
+			html = "<li><a href="+"'"+url+"'>" + cates[x] + "</a></li>";
+			$(".category_cont").append(html);
+		}
+	}
+	$(document).ready(function() {
+		
+		$.ajax({
+			type : "GET",
+			url : "<%=request.getContextPath()%>/static/category.json",
+			dataType : "json",
+			success : function(data) {
+				category_dict = eval(data);
+				render(category_dict);
+			}
+		});
+		
+		$(".class_tree ul li").click(function() {
+			console.log("鼠标点击");
+			$(this).addClass("current_style").siblings()
+			.removeClass("current_style");
+			alter();
+		});
+	})
+	
+	
+</script>
 </head>
-<body>
+<body style="background: white;">
 	<!--header-->
 	<header>
 		<a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
-		<h1>个人中心</h1>
-		<a href="user_set.html" class="iconfont setIcon">&#42;</a>
+		<h1>九教</h1>
+		<a href="search.html" class="rt_searchIcon">&#37;</a>
 	</header>
 	<div style="height: 1rem;"></div>
-	<div class="userInfor">
-		<a class="userIcon"><img src="images/icon/DefaultAvatar.jpg" /></a>
-		<h2>${user.name}</h2>
-	</div>
-	<ul class="userList">
-		<li><a href="<%=request.getContextPath()%>/lostList" class="orderListIcon">失物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/foundList" class="collectionIcon">拾物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/profile" class="profileIcon">个人资料</a></li>
+	<!--category list-->
+	<aside class="class_tree">
+		<ul>
+
+		</ul>
+	</aside>
+	<!--category content-->
+	<ul class="category_cont">
 	</ul>
-	<!--fixedNav:footer-->
 	<div style="height: 1.2rem;"></div>
 	<nav>
 		<a href="<%=request.getContextPath()%>/index" class="homeIcon">首页</a>

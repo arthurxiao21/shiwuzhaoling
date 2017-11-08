@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.findUserByUser_idAndPassword(user);
 	}
 
+	@Override
+	public void updateUser(User u) {
+		userMapper.updateUser(u);
+	}
+
 }

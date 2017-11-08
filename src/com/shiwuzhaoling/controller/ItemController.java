@@ -83,6 +83,7 @@ public class ItemController {
 			Integer user_id = ((User) session.getAttribute("user")).getUser_id();
 			List<ItemCustom> itemCustomList = itemService.findItemsByLoster_id(user_id);
 			map.put("itemCustomList", itemCustomList);
+			map.put("user", (User)session.getAttribute("user"));
 			return "lostList";
 		}
 		return "redirect:login";
@@ -94,6 +95,7 @@ public class ItemController {
 			Integer user_id = ((User) session.getAttribute("user")).getUser_id();
 			List<ItemCustom> itemCustomList = itemService.findItemsByFounder_id(user_id);
 			map.put("itemCustomList", itemCustomList);
+			map.put("user", (User)session.getAttribute("user"));
 			return "foundList";
 		}
 		return "redirect:login";

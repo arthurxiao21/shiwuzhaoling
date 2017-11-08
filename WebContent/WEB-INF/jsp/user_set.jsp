@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>注册</title>
+<title>用户资料修改</title>
 <meta name="keywords" content="KEYWORDS..." />
 <meta name="description" content="DESCRIPTION..." />
 <meta name="author" content="DeathGhost" />
@@ -86,7 +86,7 @@
 	<!--header-->
 	<header>
 		<a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
-		<h1>注册</h1>
+		<h1>修改</h1>
 	</header>
 	<div style="height: 1rem;"></div>
 	<div class="beforeMark"></div>
@@ -105,15 +105,13 @@
 			id="email" type="text" placeholder="Email" class="textbox" /></li>
 		<li><label class="lit">学号：</label> <input name="stu_id"
 			id="stu_id" type="text" placeholder="学号" class="textbox" /></li>
-		<li class="liLink"><a href="article.html" class="fl">《用户协议》</a> <a href="<%=request.getContextPath()%>/login" class="fr">已有账号，登陆</a></li>
-		<li><input type="submit" value="立即注册" /></li>
+		<li><input type="submit" value="提交" /></li>
 	</ul>
 	</form>
 	<div style="height: 1.2rem;"></div>
 	<nav>
 		<a href="<%=request.getContextPath()%>/index" class="homeIcon">首页</a>
 		<a href="<%=request.getContextPath()%>/category" class="categoryIcon">分类</a>
-		<a href="<%=request.getContextPath()%>/itemPublish" class="cartIcon">发布</a>
 		<a href="<%=request.getContextPath()%>/user" class="userIcon">我的</a>
 	</nav>
 	<script>

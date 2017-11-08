@@ -18,5 +18,9 @@
 	resultType="User">
 	SELECT * FROM `user` WHERE user_id=#{values}
 	</select>
-
+	<update id="updateUser" parameterType="User">
+	UPDATE `user` 
+	SET telephone=#{telephone},password=#{password},name=#{name},email=#{email},stu_id=#{stu_id}
+	WHERE user_id=#{user_id}
+	</update>
 </mapper>

@@ -68,6 +68,7 @@
 	<nav>
 		<a href="<%=request.getContextPath()%>/index" class="homeIcon">首页</a>
 		<a href="<%=request.getContextPath()%>/category" class="categoryIcon">分类</a>
+		<a href="<%=request.getContextPath()%>/itemPublish" class="cartIcon">发布</a>
 		<a href="<%=request.getContextPath()%>/user" class="userIcon">我的</a>
 	</nav>
 	<script>

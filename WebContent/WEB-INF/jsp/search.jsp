@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>个人中心</title>
+<title>搜索</title>
 <meta name="keywords" content="KEYWORDS..." />
 <meta name="description" content="DESCRIPTION..." />
 <meta name="author" content="DeathGhost" />
@@ -26,25 +26,77 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/style.css" />
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/js/swiper.min.js"></script>
+<script>
+	var submitForm = function() {
+		$("form").submit();
+	}
+	$(document).ready(function() {
+		$(".searchHistory dd:last a").click(function() {
+			var clear = confirm("确定清除搜索记录吗?");
+			if (clear == true) {
+				$(this).parents(".searchHistory").find("dd").remove();
+			}
+		});
+
+	});
+</script>
 </head>
 <body>
 	<!--header-->
 	<header>
 		<a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
-		<h1>个人中心</h1>
-		<a href="user_set.html" class="iconfont setIcon">&#42;</a>
+		<h1>搜索</h1>
 	</header>
 	<div style="height: 1rem;"></div>
-	<div class="userInfor">
-		<a class="userIcon"><img src="images/icon/DefaultAvatar.jpg" /></a>
-		<h2>${user.name}</h2>
-	</div>
-	<ul class="userList">
-		<li><a href="<%=request.getContextPath()%>/lostList" class="orderListIcon">失物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/foundList" class="collectionIcon">拾物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/profile" class="profileIcon">个人资料</a></li>
-	</ul>
-	<!--fixedNav:footer-->
+	<aside class="searchArea">
+		<form method="post" action="<%=request.getContextPath()%>/search">
+			<input type="text" id="cate" name="cate" placeholder="填入分类" /> <input
+				type="text" id="address" name="address" placeholder="填入地点" /> <input
+				type="text" id="is_lost" name="is_lost" placeholder="0为失物1为拾物" /> <input
+				type="button" value="&#63;" class="searchBtn" onClick="submitForm()" />
+		</form>
+	</aside>
+	<dl class="searchHistory">
+		<dt>历史搜索</dt>
+		<dd>
+			<ul>
+				<li><a href="category.html">书籍</a></li>
+				<li><a href="category.html">九教</a></li>
+				<li><a href="category.html">雨伞</a></li>
+				<li><a href="category.html">一卡通</a></li>
+			</ul>
+		</dd>
+		<dd>
+			<a>清空历史记录</a>
+		</dd>
+	</dl>
+	<dl class="tab_proList">
+		<dt>
+			<a>搜索结果</a>
+		</dt>
+		<dd>
+			<ul>
+				<c:forEach var="item" items="${itemCustomList }">
+					<li><a
+						href="<%=request.getContextPath() %>/items/${item.item_id}"
+						class="goodsPic"> <img src="upload/goods000.png" />
+					</a>
+						<div class="goodsInfor">
+							<h2>
+								<a href="<%=request.getContextPath() %>/items/${item.item_id}">${item.category }</a>
+							</h2>
+							<p>${item.description }</p>
+							<p>
+								<strong class="price">${item.lost_address }</strong>
+							</p>
+							<a href="" class="addToCart">&#126;</a>
+						</div></li>
+				</c:forEach>
+			</ul>
+		</dd>
+
+	</dl>
 	<div style="height: 1.2rem;"></div>
 	<nav>
 		<a href="<%=request.getContextPath()%>/index" class="homeIcon">首页</a>

@@ -8,6 +8,7 @@ import com.shiwuzhaoling.mapper.ItemMapper;
 import com.shiwuzhaoling.mapper.UserMapper;
 import com.shiwuzhaoling.pojo.Item;
 import com.shiwuzhaoling.pojo.ItemCustom;
+import com.shiwuzhaoling.pojo.ItemCustomQueryVo;
 import com.shiwuzhaoling.pojo.ItemInfo;
 import com.shiwuzhaoling.pojo.ItemQueryVo;
 import com.shiwuzhaoling.service.ItemService;
@@ -58,5 +59,13 @@ public class ItemServiceImpl implements ItemService {
 	public List<ItemCustom> findItemsByFounder_id(Integer user_id) {
 		return itemMapper.findItemsByFounder_id(user_id);
 	}
+
+	
+	@Override
+	public List<ItemCustom> findItemsByCateAddressIs_lost(ItemCustomQueryVo icqv) {
+		return itemMapper.findItemsByCateAddressIs_lost(icqv);
+	}
+
+	
 
 }

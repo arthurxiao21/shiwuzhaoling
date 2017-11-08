@@ -26,19 +26,19 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	//用户登陆
-	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String login(User user,HttpSession session, Map<String,Object> map) {
-		//判断是否存在用户
+	// 用户登陆
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(User user, HttpSession session, Map<String, Object> map) {
+		// 判断是否存在用户
 		System.out.println(user.toString());
 		User isExistUser = userService.existUser(user.getUser_id());
-		if(isExistUser==null){
-			map.put("notUser","notUser");
+		if (isExistUser == null) {
+			map.put("notUser", "notUser");
 			return "login";
 		}
-		//判断用户名和密码是否都正确
+		// 判断用户名和密码是否都正确
 		User u = userService.findUserByUser_idAndPassword(user);
-		if(u==null){
+		if (u == null) {
 			map.put("notPassword", "notPassword");
 			return "login";
 		}
@@ -46,35 +46,61 @@ public class UserController {
 		return "redirect:index";
 	}
 
-	//用户注册跳转
+	// 用户注册跳转
 	@RequestMapping("/userRegister")
-	public String register(){
+	public String register() {
 		return "register";
 	}
-	//用户注册
+
+	// 用户注册
 	@RequestMapping("/register")
 	public String register(User user) {
-		if(user.getTelephone()==null)
+		if (user.getTelephone() == null)
 			return "user";
 		else
 			userService.saveUser(user);
 		return "user";
 	}
-	
-	//跳转到用户登陆
+
+	// 跳转到用户登陆
 	@RequestMapping("/userLogin")
 	public String userLogin(HttpSession session) {
-		if(session.getAttribute("user")!=null){
+		if (session.getAttribute("user") != null) {
 			return "redirect:user";
-		}else{
+		} else {
 			return "login";
 		}
 	}
+
 	@RequestMapping("/user")
-	public String user(HttpSession session){
-		if(session.getAttribute("user")==null)
+	public String user(HttpSession session) {
+		if (session.getAttribute("user") == null)
 			return "login";
 		return "user";
 	}
-	
+
+	@RequestMapping("/user_set")
+	public String user_set(User user, HttpSession session) {
+		if (session.getAttribute("user") == null)
+			return "login";
+		if(session.getAttribute("user")!=null&&user==null){
+			User u = ((User) session.getAttribute("user"));
+			userService.updateUser(u);
+			return "user";
+		}
+		return "login";
+	}
+	@RequestMapping("/profile")
+	public String profile(HttpSession session,Map<String,Object> map){
+		User u = (User) session.getAttribute("user");
+		if(u==null)
+		return "login";
+		else{
+			u= userService.findUserByUser_idAndPassword(u);
+			map.put("user", u);
+			System.out.println(u.toString());
+			return "profile";
+		}
+	}
+
 }

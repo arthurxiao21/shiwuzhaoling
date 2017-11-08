@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.shiwuzhaoling.pojo.Item;
 import com.shiwuzhaoling.pojo.ItemCustom;
+import com.shiwuzhaoling.pojo.ItemCustomQueryVo;
 import com.shiwuzhaoling.pojo.ItemInfo;
 import com.shiwuzhaoling.pojo.ItemQueryVo;
 
@@ -18,5 +19,6 @@ public interface ItemService {
 	void saveFoundItem(Item foundItem);
 	List<ItemCustom> findItemsByLoster_id(Integer user_id);
 	List<ItemCustom> findItemsByFounder_id(Integer user_id);
+	List<ItemCustom> findItemsByCateAddressIs_lost(ItemCustomQueryVo icqv);
 
 }

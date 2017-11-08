@@ -13,6 +13,8 @@ public interface UserMapper {
 	User findUserByUser_idAndPassword(User user);
 
 	User existUser(Integer user_id);
+
+	void updateUser(User u);
 	 
 
 }

@@ -15,4 +15,6 @@ public interface UserService {
 	User existUser(Integer user_id);
 
 	User findUserByUser_idAndPassword(User user);
+
+	void updateUser(User u);
 }

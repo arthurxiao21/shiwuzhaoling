@@ -32,28 +32,41 @@
 	<select id="findItemInfoByItem_id" parameterType="Integer"
 		resultMap="ItemInfoMap">
 		SELECT i.*,u.name,u.email,u.telephone
-		FROM item i LEFT JOIN user u ON i.loster_id=u.user_id
+		FROM item i LEFT JOIN
+		user u ON i.loster_id=u.user_id
 		WHERE
 		i.item_id=#{values}
 	</select>
 	<insert id="saveLostItem" parameterType="Item">
-	INSERT INTO
-	`item`(description,category,lost_address,is_lost,loster_id)
-	 VALUES(#{description},#{category},#{lost_address},#{is_lost},#{loster_id})
+		INSERT INTO
+		`item`(description,category,lost_address,is_lost,loster_id)
+		VALUES(#{description},#{category},#{lost_address},#{is_lost},#{loster_id})
 	</insert>
 	<insert id="saveFoundItem" parameterType="Item">
-	INSERT INTO
-	`item`(description,category,found_address,is_lost,founder_id)
-	 VALUES(#{description},#{category},#{lost_address},#{is_lost},#{loster_id})
+		INSERT INTO
+		`item`(description,category,found_address,is_lost,founder_id)
+		VALUES(#{description},#{category},#{lost_address},#{is_lost},#{loster_id})
 	</insert>
 	<select id="findItemsByFounder_id" parameterType="Integer"
-	resultType="ItemCustom">
-	SELECT item_id,category,description,found_address
-	FROM `item` WHERE founder_id=#{values}
+		resultType="ItemCustom">
+		SELECT item_id,category,description,found_address
+		FROM `item` WHERE founder_id=#{values}
 	</select>
 	<select id="findItemsByLoster_id" parameterType="Integer"
-	resultType="ItemCustom">
-	SELECT item_id,category,description,lost_address
-	FROM `item` WHERE loster_id=#{values}
+		resultType="ItemCustom">
+		SELECT item_id,category,description,lost_address
+		FROM `item` WHERE loster_id=#{values}
+	</select>
+	<select id="findItemsByCateAddressIs_lost" parameterType="ItemCustomQueryVo"
+		resultType="ItemCustom">
+		SELECT item_id,category,description,
+		<choose>
+			<when test="is_lost==0">
+				lost_address FROM `item` WHERE category=#{cate} and lost_address=#{address}
+			</when>
+			<otherwise>
+				found_address FROM `item` WHERE category=#{cate} and found_address=#{address}
+			</otherwise>
+		</choose>
 	</select>
 </mapper>

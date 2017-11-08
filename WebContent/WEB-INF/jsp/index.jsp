@@ -36,7 +36,7 @@
 		//从api获取items数据
 		$.ajax({
 			type : "GET",
-			url : "/shiwuzhaoling/api/items",
+			url : "<%=request.getContextPath()%>/api/items",
 			dataType : "json",
 			data : latter_url,
 			success : function render(result){
@@ -196,6 +196,7 @@
 	<nav>
 		<a href="<%=request.getContextPath()%>/index" class="homeIcon">首页</a>
 		<a href="<%=request.getContextPath()%>/category" class="categoryIcon">分类</a>
+		<a href="<%=request.getContextPath()%>/itemPublish" class="cartIcon">发布</a>
 		<a href="<%=request.getContextPath()%>/user" class="userIcon">我的</a>
 	</nav>
 	<script>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>个人中心</title>
+<title>${user.name }的拾物列表</title>
 <meta name="keywords" content="KEYWORDS..." />
 <meta name="description" content="DESCRIPTION..." />
 <meta name="author" content="DeathGhost" />
@@ -26,25 +26,43 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/style.css" />
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/js/swiper.min.js"></script>
 </head>
 <body>
 	<!--header-->
 	<header>
-		<a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
-		<h1>个人中心</h1>
-		<a href="user_set.html" class="iconfont setIcon">&#42;</a>
+		<a href="location.html" class="location">九教</a> <a href="search.html"
+			class="rt_searchIcon">&#37;</a>
 	</header>
 	<div style="height: 1rem;"></div>
-	<div class="userInfor">
-		<a class="userIcon"><img src="images/icon/DefaultAvatar.jpg" /></a>
-		<h2>${user.name}</h2>
-	</div>
-	<ul class="userList">
-		<li><a href="<%=request.getContextPath()%>/lostList" class="orderListIcon">失物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/foundList" class="collectionIcon">拾物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/profile" class="profileIcon">个人资料</a></li>
-	</ul>
-	<!--fixedNav:footer-->
+	<!--Tab:productList-->
+	<dl class="tab_proList">
+		<dt>
+			<a>${user.name}的失物</a>
+		</dt>
+		<dd>
+			<ul>
+				<c:forEach var="item" items="${itemCustomList }">
+					<li><a
+						href="<%=request.getContextPath() %>/items/${item.item_id}"
+						class="goodsPic"> <img src="upload/goods001.png" />
+					</a>
+						<div class="goodsInfor">
+							<h2>
+								<a href="<%=request.getContextPath() %>/items/${item.item_id}">${item.category }</a>
+							</h2>
+							<p>${item.description }</p>
+							<p>
+								<strong class="price">${item.found_address }</strong>
+							</p>
+							<a href="" class="addToCart">&#126;</a>
+						</div></li>
+				</c:forEach>
+			</ul>
+		</dd>
+
+	</dl>
+
 	<div style="height: 1.2rem;"></div>
 	<nav>
 		<a href="<%=request.getContextPath()%>/index" class="homeIcon">首页</a>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title></title>
+<title>${user.name }的失物列表</title>
 <meta name="keywords" content="KEYWORDS..." />
 <meta name="description" content="DESCRIPTION..." />
 <meta name="author" content="DeathGhost" />
@@ -27,48 +27,6 @@
 	href="<%=request.getContextPath()%>/css/style.css" />
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/js/swiper.min.js"></script>
-<script>
-	$(document)
-			.ready(
-					function() {
-						//轮播图效果
-						//limit:每次获取的数量
-						//offset:记录获取的量
-						//is_lost:0为失物，1为拾物
-						var limit = 10;
-						var offset = 0;
-						var is_lost = 0;
-						//product list:Tab
-						//tab_proList 的点击切换功能
-						$(".tab_proList dd").eq(0).show().siblings(
-								".tab_proList dd").hide();
-						$(".tab_proList dt a").eq(0).addClass("currStyle");
-						$(".tab_proList dt a").click(
-								function() {
-									var liindex = $(".tab_proList dt a").index(
-											this);
-									//将请求的items更改
-									is_lost = liindex;
-									$(this).addClass("currStyle").siblings()
-											.removeClass("currStyle");
-									$(".tab_proList dd").eq(liindex)
-											.fadeIn(150).siblings(
-													".tab_proList dd").hide();
-								});
-						getItemsAndRender(limit,offset,0)==1?offset++:null;
-						window.onscroll = function() {
-							var height = document.body.clientHeight;
-							var scrollTop = document.documentElement.scrollTop
-									|| document.body.scrollTop;
-							var windowH = window.innerHeight;
-							if (scrollTop + windowH > height - 30) {
-								//ajax获取json数据
-								getItemsAndRender(limit, offset, is_lost) == 1 ? offset++
-										: null;
-							}
-						}
-					});
-</script>
 </head>
 <body>
 	<!--header-->
@@ -77,71 +35,29 @@
 			class="rt_searchIcon">&#37;</a>
 	</header>
 	<div style="height: 1rem;"></div>
-	<!--slide-->
-	<div id="slide">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide">
-				<a href="#"> <img src="upload/slide-001.png" />
-				</a>
-			</div>
-			<div class="swiper-slide">
-				<a href="#"> <img src="upload/slide-002.png" />
-				</a>
-			</div>
-		</div>
-		<div class="pagination"></div>
-	</div>
 	<!--Tab:productList-->
 	<dl class="tab_proList">
 		<dt>
-			<a>失物</a> <a>拾物</a>
+			<a>${user.name}的失物</a>
 		</dt>
 		<dd>
 			<ul>
-				<!-- 这里会异步加载 -->
-			</ul>
-		</dd>
-		<dd>
-			<ul>
-				<li><a href="product.html" class="goodsPic"> <img
-						src="upload/goods001.jpg" />
-				</a>
-					<div class="goodsInfor">
-						<h2>
-							<a href="product.html">雨伞</a>
-						</h2>
-						<p>一把雨伞，伞是全黑的</p>
-						<p>
-							<strong class="price">九教</strong>
-						</p>
-						<a href="/item/1" class="addToCart">&#126;</a>
-					</div></li>
-				<li><a href="product.html" class="goodsPic"> <img
-						src="upload/goods001.jpg" />
-				</a>
-					<div class="goodsInfor">
-						<h2>
-							<a href="product.html">雨伞</a>
-						</h2>
-						<p>一把雨伞，伞是全黑的</p>
-						<p>
-							<strong class="price">九教</strong>
-						</p>
-						<a href="/item/1" class="addToCart">&#126;</a>
-					</div></li>
-				<li><a href="product.html" class="goodsPic"> <img
-						src="upload/goods001.jpg" />
-				</a>
-					<div class="goodsInfor">
-						<h2>
-							<a href="product.html">雨伞</a>
-						</h2>
-						<p>一把雨伞，伞是全黑的</p>
-						<p>
-							<strong class="price">九教</strong>
-						</p>
-						<a href="/item/1" class="addToCart">&#126;</a>
-					</div></li>
+				<c:forEach var="item" items="${itemCustomList }">
+					<li><a
+						href="<%=request.getContextPath() %>/items/${item.item_id}"
+						class="goodsPic"> <img src="upload/goods000.png" />
+					</a>
+						<div class="goodsInfor">
+							<h2>
+								<a href="<%=request.getContextPath() %>/items/${item.item_id}">${item.category }</a>
+							</h2>
+							<p>${item.description }</p>
+							<p>
+								<strong class="price">${item.lost_address }</strong>
+							</p>
+							<a href="" class="addToCart">&#126;</a>
+						</div></li>
+				</c:forEach>
 			</ul>
 		</dd>
 
@@ -151,6 +67,7 @@
 	<nav>
 		<a href="<%=request.getContextPath()%>/index" class="homeIcon">首页</a>
 		<a href="<%=request.getContextPath()%>/category" class="categoryIcon">分类</a>
+		<a href="<%=request.getContextPath()%>/itemPublish" class="cartIcon">发布</a>
 		<a href="<%=request.getContextPath()%>/user" class="userIcon">我的</a>
 	</nav>
 	<script>

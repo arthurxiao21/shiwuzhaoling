@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>个人中心</title>
+<title>个人资料</title>
 <meta name="keywords" content="KEYWORDS..." />
 <meta name="description" content="DESCRIPTION..." />
 <meta name="author" content="DeathGhost" />
@@ -28,34 +28,43 @@
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 </head>
 <body>
-	<!--header-->
-	<header>
-		<a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
-		<h1>个人中心</h1>
-		<a href="user_set.html" class="iconfont setIcon">&#42;</a>
-	</header>
-	<div style="height: 1rem;"></div>
-	<div class="userInfor">
-		<a class="userIcon"><img src="images/icon/DefaultAvatar.jpg" /></a>
-		<h2>${user.name}</h2>
-	</div>
-	<ul class="userList">
-		<li><a href="<%=request.getContextPath()%>/lostList" class="orderListIcon">失物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/foundList" class="collectionIcon">拾物列表</a></li>
-		<li><a href="<%=request.getContextPath()%>/profile" class="profileIcon">个人资料</a></li>
-	</ul>
-	<!--fixedNav:footer-->
-	<div style="height: 1.2rem;"></div>
-	<nav>
-		<a href="<%=request.getContextPath()%>/index" class="homeIcon">首页</a>
-		<a href="<%=request.getContextPath()%>/category" class="categoryIcon">分类</a>
-		<a href="<%=request.getContextPath()%>/itemPublish" class="cartIcon">发布</a>
-		<a href="<%=request.getContextPath()%>/user" class="userIcon">我的</a>
-	</nav>
-	<script>
-		document.oncontextmenu = new Function("event.returnValue=false;");
-		document.onselectstart = new Function("event.returnValue=false;");
-	</script>
-
+<!--header-->
+<header>
+ <a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
+ <h1>个人资料</h1>
+</header>
+<div style="height:1rem;"></div>
+<ul class="inforList">
+ <li>
+  <a href="change_name.html" class="isNext">
+   <span>手机号码</span>
+   <span>${user.telephone }</span>
+  </a>
+ </li>
+ <li>
+  <a href="change_name.html" class="isNext">
+   <span>user_id</span>
+   <span>${user.user_id }</span>
+  </a>
+ </li>
+ <li>
+  <a href="change_name.html" class="isNext">
+   <span>姓名</span>
+   <span>${user.name }</span>
+  </a>
+ </li>
+ <li>
+  <a href="change_name.html" class="isNext">
+   <span>email</span>
+   <span>${user.email }</span>
+  </a>
+ </li>
+ <li>
+  <a href="change_name.html" class="isNext">
+   <span>学号</span>
+   <span>${user.stu_id }</span>
+  </a>
+ </li>
+</ul>
 </body>
 </html>
