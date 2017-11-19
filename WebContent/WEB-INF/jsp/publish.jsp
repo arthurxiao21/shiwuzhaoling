@@ -53,8 +53,9 @@
 		action="<%=request.getContextPath()%>/publish"
 		onsubmit="return checkForm()">
 		<ul class="formarea">
-			<li><label class="lit">失物或拾物:</label><input name="is_lost"
-				type="text" id="is_lost" placeholder="0或1" class="textbox" /></li>
+			<li style="line-height:10em"><label class="lit">失物：<input name="is_lost"
+					type='radio' value='0'>
+			</label><label>拾物：<input name="is_lost" type='radio' value='0'></label></li>
 			<li><label class="lit">类别：</label> <input name="category"
 				type="text" id="category" placeholder="类别" class="textbox" /></li>
 			<li><label class="lit">地点：</label> <input name="lost_address"

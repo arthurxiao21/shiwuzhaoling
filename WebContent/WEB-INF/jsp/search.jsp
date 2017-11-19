@@ -52,8 +52,9 @@
 	<aside class="searchArea">
 		<form method="post" action="<%=request.getContextPath()%>/search">
 			<input type="text" id="cate" name="cate" placeholder="填入分类" /> <input
-				type="text" id="address" name="address" placeholder="填入地点" /> <input
-				type="text" id="is_lost" name="is_lost" placeholder="0为失物1为拾物" /> <input
+				type="text" id="address" name="address" placeholder="填入地点" /><label
+				class="lit">失物：<input name="is_lost" type='radio' value='0'>
+			</label><label>拾物：<input name="is_lost" type='radio' value='0'></label><input
 				type="button" value="&#63;" class="searchBtn" onClick="submitForm()" />
 		</form>
 	</aside>

@@ -55,7 +55,7 @@
 							<p>
 								<strong class="price">${item.lost_address }</strong>
 							</p>
-							<a href="" class="addToCart">&#126;</a>
+							<a href="" class="addToCart"></a>
 						</div></li>
 				</c:forEach>
 			</ul>

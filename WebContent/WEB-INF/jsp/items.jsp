@@ -37,9 +37,7 @@
 		<h1>物品详情</h1>
 	</header>
 	<div style="height: 1rem;"></div>
-	<div class="pro_bigImg">
-		<img src="../upload/goods007.jpg" />
-	</div>
+	
 	<!--base information-->
 	<!--product attr-->
 	<dl class="pro_attr">
@@ -70,14 +68,8 @@
 	<!--bottom nav-->
 	<div style="height: 1rem;"></div>
 	<aside class="btmNav">
-		<c:if test="${itemInfo.is_lost==0}">
+		
 			<a style="background: #64ab5b; color: white; text-shadow: none;">我要撤销</a>
-			<a style="background: #87a983; color: white; text-shadow: none;">已经归还</a>
-		</c:if>
-		<c:if test="${itemInfo.is_lost==1}">
-			<a style="background: #64ab5b; color: white; text-shadow: none;">我要认领</a>
-			<a style="background: #87a983; color: white; text-shadow: none;">已经归还</a>
-		</c:if>
 	</aside>
 </body>
 </html>

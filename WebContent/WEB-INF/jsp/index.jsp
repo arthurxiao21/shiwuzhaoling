@@ -56,7 +56,7 @@
 							+ '</p><p><strong class="price">'
 							+ item.lost_address
 							+ '</strong></p><a href="/item/'+item.item_id
-							+'" class="addToCart">&#126;</a></div></li>';
+							+'" class="addToCart"></a></div></li>';
 											console.log(is_lost);
 											$(".tab_proList dd").eq(is_lost)
 													.find("ul").append(html);

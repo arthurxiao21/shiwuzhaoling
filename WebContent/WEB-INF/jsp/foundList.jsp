@@ -38,7 +38,7 @@
 	<!--Tab:productList-->
 	<dl class="tab_proList">
 		<dt>
-			<a>${user.name}的失物</a>
+			<a>${user.name}的拾物</a>
 		</dt>
 		<dd>
 			<ul>
@@ -55,7 +55,7 @@
 							<p>
 								<strong class="price">${item.found_address }</strong>
 							</p>
-							<a href="" class="addToCart">&#126;</a>
+							<a href="" class="addToCart"></a>
 						</div></li>
 				</c:forEach>
 			</ul>
